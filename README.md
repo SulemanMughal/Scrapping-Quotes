@@ -20,3 +20,12 @@ Demonstrate a script that extract all quotes data from website https://quotes.to
 ## Demo
 
 ![Data Output](https://github.com/SulemanMughal/Scrapping-Quotes/blob/main/scrape.PNG)
+## Lessons Learned
+
+There are four steps to web scraping.
+
+    1.  Select Request
+    2.  Get Response
+    3.  Select Data
+    4.  Extract Data
+
