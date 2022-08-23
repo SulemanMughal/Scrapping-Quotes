@@ -1,22 +1,28 @@
 import requests
+import pandas as pd
 from bs4 import BeautifulSoup
+
 website = requests.get('https://quotes.toscrape.com/')
 soup = BeautifulSoup(website.text, 'html.parser')
-title = soup.find('title')
-print("Title of the webiste: ", title, title.text)
+
 links = soup.findAll('a')
-for link in links:
-    print(link.text)
-quote = soup.find(class_="text")
-print("Quote == ", quote)
-links_2 = soup.find_all('a')
-print("All Links : 2::\n", links_2)
-quotes = soup.find_all(class_='text')
+
+with open('links.txt', 'w') as f:
+    for link in links[1:]:
+        f.write(link["href"])
+        f.write("\n")
+
+quotes = soup.find_all(class_='quote')
+quotes_list = []
+author_list = []
 for quote in quotes:
-    print(quote.text)
-login_link = soup.find(href="/login")
-print("Login Link : ", login_link)
-quote = soup.find(class_='quote')
-quote_text = quote.find(class_='text')
-quote_author = quote.find(class_='author')
-print(quote, quote_text.text, quote_author.text)
+    quotes_list.append(quote.find(class_="text").text[1:-1])
+    author_list.append(quote.find(class_='author').text)
+
+
+quotation = pd.DataFrame(columns = ['Quote' , 'Author' ])
+
+quotation = pd.DataFrame({"Quote" : quotes_list , "Author" : author_list })
+
+
+quotation.to_csv('quotes.csv' , index=False)
