@@ -50,5 +50,3 @@
 /tag/friends/
 /tag/truth/
 /tag/simile/
-https://www.goodreads.com/quotes
-https://scrapinghub.com
